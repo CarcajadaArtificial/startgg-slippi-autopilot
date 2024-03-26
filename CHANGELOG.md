@@ -1,5 +1,5 @@
 # Changelog
 
-## v0.0.1
+## v0.0.2
 
-- Added the Deno Fresh boilerplate
+- Removed Deno Fresh showcase functionality.

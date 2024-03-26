@@ -8,7 +8,7 @@ export default function App({ Component }: PageProps) {
         <title>startgg-result-reporter</title>
         <link rel="stylesheet" href="/styles.css" />
       </head>
-      <body>
+      <body class="h-screen">
         <Component />
       </body>
     </html>
