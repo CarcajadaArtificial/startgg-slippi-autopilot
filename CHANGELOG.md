@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.0.4
+
+- Added the route `/set/index.tsx`.
+- Added the `startgg/importTournament` and `startgg/updateSet` API endpoints.
+
 ## v0.0.3
 
 - Added route documentation to `/index.tsx`.
