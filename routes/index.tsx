@@ -28,6 +28,7 @@
 export default function Home() {
   return (
     <div>
+      <a href="/set">Go to all sets</a>
     </div>
   );
 }

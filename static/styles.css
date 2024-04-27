@@ -2,12 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --clr-lighter: #eadfd2;
+  --clr-light: #93a18c;
+  --clr-base: #435b66;
+  --clr-dark: #2d4356;
+  --clr-darker: #0f2533;
+}
+
 body {
-  background: linear-gradient(270deg, #2d4356, #435b66);
+  background: linear-gradient(270deg, var(--clr-dark), var(--clr-darker));
   background-size: 400% 400%;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
     'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   margin: 0;
+  color: var(--clr-lighter);
 
   -webkit-animation: GradientBackground 30s ease infinite;
   -webkit-font-smoothing: antialiased;
