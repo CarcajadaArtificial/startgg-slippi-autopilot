@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.0.6
+
+- Added `status` to the set data.
+
 ## v0.0.5
 
 - Added CSS variables and link styles.

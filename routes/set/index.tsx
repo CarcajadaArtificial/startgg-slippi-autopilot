@@ -24,7 +24,6 @@ import { getAllTournamentSets } from "@/src/startgg.ts";
  */
 export default defineRoute(async (_req, _ctx) => {
   const tournament = (await getAllTournamentSets()).event;
-  console.log(tournament.phases[0].sets.nodes[0].slots[0].entrant.name);
   return (
     <div class="m-4">
       <div class="ml-4">
@@ -41,9 +40,20 @@ export default defineRoute(async (_req, _ctx) => {
             {phase.sets.nodes.map((set) =>
               set.slots[0].entrant && set.slots[1].entrant
                 ? (
-                  <a class="bg-darker hover:bg-dark p-4 rounded cursor-pointer">
-                    <p class="font-bold">{set.slots[0].entrant.name}</p>
-                    <p class="font-bold">{set.slots[1].entrant.name}</p>
+                  <a
+                    class="bg-darker hover:bg-dark p-4 rounded cursor-pointer"
+                    href={`/set/${set.id}`}
+                  >
+                    <div class="pb-2 mb-2 border-base border-b-2">
+                      <p class="font-bold text-center">
+                        {set.slots[0].entrant.name}
+                      </p>
+                      <code class="text-xs text-center block">vs</code>
+                      <p class="font-bold text-center">
+                        {set.slots[1].entrant.name}
+                      </p>
+                    </div>
+                    <p>{set.state}</p>
                     <code class="text-xs">{set.id}</code>
                   </a>
                 )
