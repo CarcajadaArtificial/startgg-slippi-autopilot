@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.0.7
+
+- Added a `<SetCard/>` component.
+- Updated the tournament model in the startgg module.
+
 ## v0.0.6
 
 - Added `status` to the set data.

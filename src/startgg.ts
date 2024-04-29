@@ -122,36 +122,60 @@ const _meleeStages = [
   },
 ];
 
-interface iRequestedTournament {
+export interface iGame {
+  id: string;
+  entrant1Score: number;
+  entrant2Score: number;
+  state: number;
+  stage: {
+    id: string;
+    name: string;
+  };
+  selections: {
+    character: {
+      id: string;
+      name: string;
+    };
+    entrant: {
+      id: string;
+      name: string;
+    };
+  }[];
+}
+
+export interface iSet {
+  id: string;
+  /* 1=Not started, 2=In Progress, 3=Finished */
+  state: number;
+  games: iGame[];
+  slots: {
+    id: string;
+    entrant: {
+      id: string;
+      name: string;
+    };
+  }[];
+}
+
+export interface iRequestedTournament {
   event: {
-    id: number;
+    id: string;
     name: string;
     phases: {
-      id: number;
+      id: string;
       name: string;
       sets: {
         pageInfo: {
           total: number;
         };
-        nodes: {
-          id: number;
-          /* 1=Not started, 2=In Progress, 3=Finished */
-          state: number;
-          slots: {
-            id: number;
-            entrant: {
-              id: number;
-              name: string;
-            };
-          }[];
-        }[];
+        nodes: iSet[];
       };
     }[];
     entrants: {
       nodes: {
-        id: number;
+        id: string;
         participants: {
-          id: number;
+          id: string;
           gamerTag: string;
         };
       }[];
@@ -186,6 +210,26 @@ export const getAllTournamentSets = () =>
             nodes {
               id
               state
+              games {
+                id
+                entrant1Score
+                entrant2Score
+                stage {
+                  id
+                  name
+                }
+                selections {
+                  character {
+                    id
+                    name
+                  }
+                  entrant {
+                    id
+                    name
+                  }
+                }
+                state
+              }
               slots {
                 id
                 entrant {
