@@ -26,7 +26,7 @@ import SetCard from "@/components/SetCard.tsx";
 export default defineRoute(async (_req, _ctx) => {
   const tournament = (await getAllTournamentSets()).event;
   return (
-    <div class="m-4">
+    <div class="px-4 py-8">
       <div class="ml-4">
         <h1 class="text-4xl font-extrabold">{tournament.name}</h1>
         <code class="text-xs opacity-50">{tournament.id}</code>

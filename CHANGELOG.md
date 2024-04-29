@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.0.8
+
+- Added assets of stage images in high and low definition.
+
 ## v0.0.7
 
 - Added a `<SetCard/>` component.
