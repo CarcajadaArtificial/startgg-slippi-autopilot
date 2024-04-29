@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.0.9
+
+- Added assets of stock images in high and low definition.
+
 ## v0.0.8
 
 - Added assets of stage images in high and low definition.
