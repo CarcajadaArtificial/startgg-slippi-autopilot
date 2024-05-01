@@ -148,6 +148,7 @@ export interface iSet {
   /* 1=Not started, 2=In Progress, 3=Finished */
   state: number;
   games: iGame[];
+  winnerId: string;
   slots: {
     id: string;
     entrant: {
@@ -157,20 +158,22 @@ export interface iSet {
   }[];
 }
 
+export interface iPhase {
+  id: string;
+  name: string;
+  sets: {
+    pageInfo: {
+      total: number;
+    };
+    nodes: iSet[];
+  };
+}
+
 export interface iRequestedTournament {
   event: {
     id: string;
     name: string;
-    phases: {
-      id: string;
-      name: string;
-      sets: {
-        pageInfo: {
-          total: number;
-        };
-        nodes: iSet[];
-      };
-    }[];
+    phases: iPhase[];
     entrants: {
       nodes: {
         id: string;
@@ -210,6 +213,7 @@ export const getAllTournamentSets = () =>
             nodes {
               id
               state
+              winnerId
               games {
                 id
                 entrant1Score
@@ -258,3 +262,12 @@ export const getAllTournamentSets = () =>
       slug: Deno.env.get("STARTGG_TOURNAMENT_SLUG"),
     },
   );
+
+export const isSetDefined = (set: iSet) =>
+  set.slots[0].entrant && set.slots[1].entrant;
+
+export const isSetUnstarted = (set: iSet) =>
+  set.state === 1 && isSetDefined(set);
+export const isSetPlaying = (set: iSet) => set.state === 2 && isSetDefined(set);
+export const isSetFinished = (set: iSet) =>
+  set.state === 3 && isSetDefined(set);

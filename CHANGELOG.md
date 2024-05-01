@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.0.10
+
+- Added the `<SetFinished/>`, `<SetDefined/>`, and `<SetUndefined/>` components.
+- Added the `isSetDefined()`, `isSetUnstarted()`, `isSetPlaying()`, and `isSetFinished()` set type
+  validation functions.
+
 ## v0.0.9
 
 - Added assets of stock images in high and low definition.
