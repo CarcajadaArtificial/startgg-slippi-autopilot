@@ -16,7 +16,7 @@ import {
   isSetFinished,
   isSetPlaying,
   isSetUnstarted,
-} from "@/src/startgg.ts";
+} from "@/src/startgg/mod.ts";
 import {
   SetDefined,
   SetFinished,

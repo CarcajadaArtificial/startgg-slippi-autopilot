@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.0.11
+
+- Refactored `startgg.ts` into its own module at `/src/startgg/`.
+
 ## v0.0.10
 
 - Added the `<SetFinished/>`, `<SetDefined/>`, and `<SetUndefined/>` components.

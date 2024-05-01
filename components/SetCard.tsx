@@ -1,5 +1,4 @@
-import { isSetFinished } from "@/src/startgg.ts";
-import type { iGame, iSet } from "@/src/startgg.ts";
+import type { iGame, iSet } from "@/src/startgg/mod.ts";
 
 interface iSetCard {
   set: iSet;
