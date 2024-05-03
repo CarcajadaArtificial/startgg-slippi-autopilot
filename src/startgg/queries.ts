@@ -2,7 +2,7 @@ import {
   gql,
   GraphQLClient,
 } from "https://deno.land/x/graphql_request@v4.1.0/mod.ts";
-import { iRequestedTournament } from "./types.ts";
+import { iEvent, iSet } from "./types.ts";
 
 const client = new GraphQLClient("https://api.start.gg/gql/alpha", {
   headers: {
@@ -11,7 +11,7 @@ const client = new GraphQLClient("https://api.start.gg/gql/alpha", {
 });
 
 export const getAllTournamentSets = () =>
-  client.request<iRequestedTournament>(
+  client.request<{ event: iEvent }>(
     gql`
     query getEventId($slug: String) {
       event(slug: $slug) {
@@ -79,4 +79,45 @@ export const getAllTournamentSets = () =>
     {
       slug: Deno.env.get("STARTGG_TOURNAMENT_SLUG"),
     },
+  );
+
+export const getSetById = (setId: string) =>
+  client.request<{ set: iSet }>(
+    gql`
+    query getSetById($setId: ID!) {
+      set(id: $setId) {
+        id
+        state
+        winnerId
+        games {
+          id
+          entrant1Score
+          entrant2Score
+          state
+          stage {
+            id
+            name
+          }
+          selections {
+            character {
+              id
+              name
+            }
+            entrant {
+              id
+              name
+            }
+          }
+        }
+        slots {
+          id
+          entrant {
+            id
+            name
+          }
+        }
+      }
+    }
+    `,
+    { setId },
   );

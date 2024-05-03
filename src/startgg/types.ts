@@ -45,19 +45,17 @@ export interface iPhase {
   };
 }
 
-export interface iRequestedTournament {
-  event: {
-    id: string;
-    name: string;
-    phases: iPhase[];
-    entrants: {
-      nodes: {
+export interface iEvent {
+  id: string;
+  name: string;
+  phases: iPhase[];
+  entrants: {
+    nodes: {
+      id: string;
+      participants: {
         id: string;
-        participants: {
-          id: string;
-          gamerTag: string;
-        };
-      }[];
-    };
+        gamerTag: string;
+      };
+    }[];
   };
 }

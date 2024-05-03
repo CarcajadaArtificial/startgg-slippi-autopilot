@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.0.12
+
+- Added the `getSet()` fetching function.
+- Added a set display in `/set/[setId].tsx`.
+
 ## v0.0.11
 
 - Refactored `startgg.ts` into its own module at `/src/startgg/`.
