@@ -77,10 +77,9 @@ export const SetFinished = (props: iSetCard) => {
   const entrants = props.set.slots.map((slot) => slot.entrant);
 
   return (
-    <a
-      class={"bg-darker hover:bg-dark p-4 rounded cursor-pointer block w-64" +
+    <div
+      class={"bg-darker p-4 rounded w-64" +
         (state === 3 ? " opacity-70" : "")}
-      href={`/set/${id}`}
     >
       <div class="pb-2 mb-2 border-base border-b-2">
         <p
@@ -103,15 +102,14 @@ export const SetFinished = (props: iSetCard) => {
       <div class="flex flex-col align-center gap-4">
         {games ? games.map((game) => <SetGameResults game={game} />) : null}
       </div>
-    </a>
+    </div>
   );
 };
 
 export const SetDefined = (props: iSetCard) => (
-  <a
-    class={"bg-darker hover:bg-dark p-4 rounded cursor-pointer block w-64" +
+  <div
+    class={"bg-darker p-4 rounded w-64" +
       (props.set.state === 3 ? " opacity-70" : "")}
-    href={`/set/${props.set.id}`}
   >
     <div class="pb-2 mb-2 border-base border-b-2">
       <p class="font-bold text-left">
@@ -125,13 +123,13 @@ export const SetDefined = (props: iSetCard) => (
     <div class="flex justify-center">
       <SetStatusIndicator {...props} />
     </div>
-  </a>
+  </div>
 );
 
 export const SetUndefined = (props: iSetCard) => {
   const entrants = [props.set.slots[0].entrant, props.set.slots[1].entrant];
   return (
-    <div class="bg-darker p-4 rounded cursor-not-allowed opacity-20 w-64">
+    <div class="bg-darker p-4 rounded opacity-20 w-64">
       <div class="pb-2 mb-2 border-base border-b-2">
         {entrants[0] && entrants[0].name
           ? (

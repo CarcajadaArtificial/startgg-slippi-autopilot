@@ -34,13 +34,16 @@ import {
  * @returns {JSXInternal.Element}
  */
 export default defineRoute(async (_req, _ctx) => {
-  const tournament = (await getAllTournamentSets()).event;
-  const allSets = tournament.phases.map((phase) => phase.sets.nodes).flat();
+  const event = (await getAllTournamentSets()).event;
+  const allSets = event.phases.map((phase) => phase.sets.nodes).flat();
   const setPlaying = allSets.filter(isSetPlaying)[0];
   return (
     <div class="px-4 py-8">
       <div class="ml-4">
-        <h1 class="text-4xl font-extrabold">{tournament.name}</h1>
+        <h1 class="text-4xl font-extrabold">{event.name}</h1>
+        <a class="text-light underline font-bold" href="/set/next">
+          Go to next set
+        </a>
       </div>
       <div class="mt-16">
         {setPlaying ? <SetFinished set={setPlaying} /> : null}

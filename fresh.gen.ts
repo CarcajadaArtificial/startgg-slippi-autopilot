@@ -9,6 +9,7 @@ import * as $api_startgg_updateSet from "./routes/api/startgg/updateSet.ts";
 import * as $index from "./routes/index.tsx";
 import * as $set_setId_ from "./routes/set/[setId].tsx";
 import * as $set_index from "./routes/set/index.tsx";
+import * as $set_next from "./routes/set/next.tsx";
 
 import { type Manifest } from "$fresh/server.ts";
 
@@ -21,6 +22,7 @@ const manifest = {
     "./routes/index.tsx": $index,
     "./routes/set/[setId].tsx": $set_setId_,
     "./routes/set/index.tsx": $set_index,
+    "./routes/set/next.tsx": $set_next,
   },
   islands: {},
   baseUrl: import.meta.url,

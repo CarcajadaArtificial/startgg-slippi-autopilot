@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.0.13
+
+- Added the `/set/next` route.
+- Removed the `<SetCard/>` component's function that links to `/set/[setId].tsx`.
+
 ## v0.0.12
 
 - Added the `getSet()` fetching function.
