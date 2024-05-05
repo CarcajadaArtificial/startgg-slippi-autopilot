@@ -10,7 +10,7 @@ import * as $index from "./routes/index.tsx";
 import * as $set_setId_ from "./routes/set/[setId].tsx";
 import * as $set_index from "./routes/set/index.tsx";
 import * as $set_next from "./routes/set/next.tsx";
-
+import * as $PlayerInterface from "./islands/PlayerInterface.tsx";
 import { type Manifest } from "$fresh/server.ts";
 
 const manifest = {
@@ -24,7 +24,9 @@ const manifest = {
     "./routes/set/index.tsx": $set_index,
     "./routes/set/next.tsx": $set_next,
   },
-  islands: {},
+  islands: {
+    "./islands/PlayerInterface.tsx": $PlayerInterface,
+  },
   baseUrl: import.meta.url,
 } satisfies Manifest;
 

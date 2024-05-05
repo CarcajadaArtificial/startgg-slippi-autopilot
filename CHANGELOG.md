@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.0.14
+
+- Added the `<PlayerInterface/>` island.
+- Added the `classnames` module.
+
 ## v0.0.13
 
 - Added the `/set/next` route.

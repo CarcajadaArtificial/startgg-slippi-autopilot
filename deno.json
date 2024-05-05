@@ -11,15 +11,10 @@
   },
   "lint": {
     "rules": {
-      "tags": [
-        "fresh",
-        "recommended"
-      ]
+      "tags": ["fresh", "recommended"]
     }
   },
-  "exclude": [
-    "**/_fresh/*"
-  ],
+  "exclude": ["**/_fresh/*"],
   "imports": {
     "@/": "./",
     "$fresh/": "https://deno.land/x/fresh@1.6.8/",
@@ -30,7 +25,8 @@
     "tailwindcss": "npm:tailwindcss@3.4.1",
     "tailwindcss/": "npm:/tailwindcss@3.4.1/",
     "tailwindcss/plugin": "npm:/tailwindcss@3.4.1/plugin.js",
-    "$std/": "https://deno.land/std@0.216.0/"
+    "$std/": "https://deno.land/std@0.216.0/",
+    "cn": "./src/classnames.ts"
   },
   "compilerOptions": {
     "jsx": "react-jsx",

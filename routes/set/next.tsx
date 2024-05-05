@@ -11,7 +11,7 @@
  */
 import { defineRoute } from "$fresh/server.ts";
 import { getAllTournamentSets, isSetUnstarted } from "@/src/startgg/mod.ts";
-import { SetDefined } from "@/components/SetCard.tsx";
+import PlayerInterface from "@/islands/PlayerInterface.tsx";
 
 /**
  * This function renders the page for an individual set in the tournament. If the set is currently not
@@ -29,9 +29,5 @@ export default defineRoute(async (_req, ctx) => {
     phase.sets.nodes
   ).flat().filter(isSetUnstarted)[0];
 
-  return (
-    <div>
-      <SetDefined set={nextSet} />
-    </div>
-  );
+  return <PlayerInterface set={nextSet} />;
 });
