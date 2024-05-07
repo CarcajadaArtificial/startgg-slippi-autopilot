@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.0.16
+
+- Added floating cards to the `/set/next` page.
+
 ## v0.0.15
 
 - Added the `<PortSelector/>` island.

@@ -32,6 +32,13 @@ export const getAllTournamentSets = () =>
               id
               state
               winnerId
+              fullRoundText
+              identifier
+              phaseGroup {
+                phase {
+                  name
+                }
+              }
               games {
                 id
                 entrant1Score

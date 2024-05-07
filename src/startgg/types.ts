@@ -25,6 +25,13 @@ export interface iSet {
   state: number;
   games: iGame[];
   winnerId: string;
+  fullRoundText: string;
+  identifier: string;
+  phaseGroup: {
+    phase: {
+      name: string;
+    };
+  };
   slots: {
     id: string;
     entrant: {
