@@ -11,6 +11,7 @@ import * as $set_setId_ from "./routes/set/[setId].tsx";
 import * as $set_index from "./routes/set/index.tsx";
 import * as $set_next from "./routes/set/next.tsx";
 import * as $PlayerInterface from "./islands/PlayerInterface.tsx";
+import * as $PortSelector from "./islands/PortSelector.tsx";
 import { type Manifest } from "$fresh/server.ts";
 
 const manifest = {
@@ -26,6 +27,7 @@ const manifest = {
   },
   islands: {
     "./islands/PlayerInterface.tsx": $PlayerInterface,
+    "./islands/PortSelector.tsx": $PortSelector,
   },
   baseUrl: import.meta.url,
 } satisfies Manifest;

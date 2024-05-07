@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.0.15
+
+- Added the `<PortSelector/>` island.
+
 ## v0.0.14
 
 - Added the `<PlayerInterface/>` island.
