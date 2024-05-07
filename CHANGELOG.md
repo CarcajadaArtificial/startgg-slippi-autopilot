@@ -2,6 +2,11 @@
 
 ## v0.0.16
 
+- Added gradient for displaying port selection.
+- Added a prevention mechanism for both players selecting the same port.
+
+## v0.0.16
+
 - Added floating cards to the `/set/next` page.
 
 ## v0.0.15

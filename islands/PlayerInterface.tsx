@@ -9,16 +9,24 @@ function PlayerSection(
     alignRight?: boolean;
     set: iSet;
     playerPort: number;
+    opponentPort: number;
     setPlayerPort: StateUpdater<number>;
   },
 ) {
-  const { alignRight, set, playerPort, setPlayerPort } = props;
+  const { alignRight, set, playerPort, setPlayerPort, opponentPort } = props;
 
   const entrant = set.slots[alignRight ? 1 : 0].entrant;
   const arrow = alignRight ? "↘" : "↙";
 
   return (
-    <div class="flex-1 p-8">
+    <div
+      class={cn(
+        "flex-1 p-8",
+        playerPort >= 1 && playerPort <= 4
+          ? `gradient${alignRight ? "-r" : ""}-${playerPort}`
+          : null,
+      )}
+    >
       <div
         class={cn(
           "h-full flex flex-col justify-between",
@@ -35,6 +43,7 @@ function PlayerSection(
           selection={playerPort}
           updater={setPlayerPort}
           alignRight={alignRight}
+          opponentSelection={opponentPort}
         />
         <div>
           <p class="text-9xl">{arrow}</p>
@@ -49,7 +58,7 @@ const FloatingCard = (
 ) => (
   <div
     class={cn(
-      "text-center absolute bg-darker p-4 rounded border-2 border-light",
+      "text-center absolute bg-darker p-4 rounded border-2 border-lighter",
       props.bottom ? "bottom-16 w-96" : "top-24 w-56",
     )}
     style={{
@@ -81,12 +90,14 @@ export default function (props: { set: iSet }) {
           set={props.set}
           playerPort={player1Port}
           setPlayerPort={setPlayer1Port}
+          opponentPort={player2Port}
         />
-        <div class="bg-light w-0.5"></div>
+        <div class="bg-lighter w-0.5"></div>
         <PlayerSection
           set={props.set}
           playerPort={player2Port}
           setPlayerPort={setPlayer2Port}
+          opponentPort={player1Port}
           alignRight
         />
       </div>
@@ -101,7 +112,7 @@ export default function (props: { set: iSet }) {
         )}
         <button
           class={cn(
-            "text-xl bg-light text-dark font-extrabold px-4 py-2 mt-4 rounded",
+            "text-xl bg-light text-darker font-extrabold px-4 py-2 mt-4 rounded border-4 border-lighter",
             enabledButton ? null : "opacity-50 cursor-not-allowed",
           )}
           disabled={!enabledButton}

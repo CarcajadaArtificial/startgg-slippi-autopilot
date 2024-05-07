@@ -62,3 +62,29 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
+
+.gradient-1 {
+  background: linear-gradient(90deg, rgba(241, 89, 89, 0.35) 0%, rgba(241, 89, 89, 0) 100%);
+}
+.gradient-2 {
+  background: linear-gradient(90deg, rgba(101, 101, 254, 0.35) 0%, rgba(101, 101, 254, 0) 100%);
+}
+.gradient-3 {
+  background: linear-gradient(90deg, rgba(254, 190, 63, 0.35) 0%, rgba(254, 190, 63, 0) 100%);
+}
+.gradient-4 {
+  background: linear-gradient(90deg, rgba(76, 228, 76, 0.35) 0%, rgba(76, 228, 76, 0) 100%);
+}
+
+.gradient-r-1 {
+  background: linear-gradient(270deg, rgba(241, 89, 89, 0.35) 0%, rgba(241, 89, 89, 0) 100%);
+}
+.gradient-r-2 {
+  background: linear-gradient(270deg, rgba(101, 101, 254, 0.35) 0%, rgba(101, 101, 254, 0) 100%);
+}
+.gradient-r-3 {
+  background: linear-gradient(270deg, rgba(254, 190, 63, 0.35) 0%, rgba(254, 190, 63, 0) 100%);
+}
+.gradient-r-4 {
+  background: linear-gradient(270deg, rgba(76, 228, 76, 0.35) 0%, rgba(76, 228, 76, 0) 100%);
+}
