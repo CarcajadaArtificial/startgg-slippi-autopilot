@@ -69,64 +69,93 @@ const FloatingCard = (
   </div>
 );
 
+type iMatchFaces = "selection" | "waiting" | "playing" | "confirm";
+
 export default function (props: { set: iSet }) {
   const { fullRoundText, identifier, phaseGroup } = props.set;
+  const [renderTimes, rerenderComponent] = useState<number>(0);
+
   const [player1Port, setPlayer1Port] = useState<number>(0);
   const [player2Port, setPlayer2Port] = useState<number>(0);
+  const [matchPhase, setMatchPhase] = useState<iMatchFaces>("selection");
 
-  const enabledButton = player1Port !== 0 && player2Port !== 0;
+  const enabledStartButton = player1Port !== 0 && player2Port !== 0;
 
-  return (
-    <div>
-      <FloatingCard>
-        <p class="text-lg font-bold">{fullRoundText}</p>
-        <code class="text-xs block mt-2 text-light">
-          {phaseGroup.phase.name}
-          <br />Match {identifier}
-        </code>
-      </FloatingCard>
-      <div class="flex" style={{ height: "100dvh" }}>
-        <PlayerSection
-          set={props.set}
-          playerPort={player1Port}
-          setPlayerPort={setPlayer1Port}
-          opponentPort={player2Port}
-        />
-        <div class="bg-lighter w-0.5"></div>
-        <PlayerSection
-          set={props.set}
-          playerPort={player2Port}
-          setPlayerPort={setPlayer2Port}
-          opponentPort={player1Port}
-          alignRight
-        />
-      </div>
-      <FloatingCard bottom>
-        <p class="text-2xl font-extrabold">
-          {phaseGroup.phase.name === "Round Robin" ? "Best of 3" : "Best of 5"}
-        </p>
-        {enabledButton ? null : (
+  if (matchPhase === "selection") {
+    return (
+      <div>
+        <FloatingCard>
+          <p class="text-lg font-bold">{fullRoundText}</p>
           <code class="text-xs block mt-2 text-light">
-            Both players must select a port before starting a match.
+            {phaseGroup.phase.name}
+            <br />Match {identifier}
           </code>
-        )}
-        <button
-          class={cn(
-            "text-xl bg-light text-darker font-extrabold px-4 py-2 mt-4 rounded border-4 border-lighter",
-            enabledButton ? null : "opacity-50 cursor-not-allowed",
-          )}
-          disabled={!enabledButton}
-        >
-          Start Tournament Match
-        </button>
-        {enabledButton
-          ? (
-            <code class="text-xs block mt-2 text-light">
-              Games after pressing this button will be reported to start.gg
-            </code>
-          )
-          : null}
-      </FloatingCard>
-    </div>
-  );
+        </FloatingCard>
+        <div class="flex" style={{ height: "100dvh" }}>
+          <PlayerSection
+            set={props.set}
+            playerPort={player1Port}
+            setPlayerPort={setPlayer1Port}
+            opponentPort={player2Port}
+          />
+          <div class="bg-lighter w-0.5"></div>
+          <PlayerSection
+            set={props.set}
+            playerPort={player2Port}
+            setPlayerPort={setPlayer2Port}
+            opponentPort={player1Port}
+            alignRight
+          />
+        </div>
+        <FloatingCard bottom>
+          <p class="text-2xl font-extrabold">
+            {phaseGroup.phase.name === "Round Robin"
+              ? "Best of 3"
+              : "Best of 5"}
+          </p>
+          {enabledStartButton
+            ? null
+            : (
+              <code class="text-xs block mt-2 text-light">
+                Both players must select a port before starting a match.
+              </code>
+            )}
+          <button
+            class={cn(
+              "text-xl bg-light text-darker font-extrabold px-4 py-2 mt-4 rounded border-4 border-lighter",
+              enabledStartButton ? null : "opacity-50 cursor-not-allowed",
+            )}
+            disabled={!enabledStartButton}
+            onClick={() => setMatchPhase("waiting")}
+          >
+            Start Tournament Match
+          </button>
+          {enabledStartButton
+            ? (
+              <code class="text-xs block mt-2 text-light">
+                Games after pressing this button will be reported to start.gg
+              </code>
+            )
+            : null}
+        </FloatingCard>
+      </div>
+    );
+  } else if (matchPhase === "waiting") {
+    setTimeout(() => {
+      // rerenderComponent(renderTimes + 1);
+    }, 1000);
+
+    return (
+      <div
+        style={{ height: "100dvh" }}
+        class="flex flex-col justify-center items-center gap-8"
+      >
+        <p class="text-6xl">Good Luck!</p>
+        <code class="text-3xl text-light">Waiting for the game to start.</code>
+        <span class="loader"></span>
+      </div>
+    );
+  } else {
+    return <>Unkown phase</>;
+  }
 }

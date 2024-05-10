@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.0.17
+
+- Added phases to the player interface.
+
 ## v0.0.16
 
 - Added gradient for displaying port selection.
