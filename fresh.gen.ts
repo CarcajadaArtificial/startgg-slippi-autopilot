@@ -4,6 +4,8 @@
 
 import * as $_404 from "./routes/_404.tsx";
 import * as $_app from "./routes/_app.tsx";
+import * as $api_slippi_cleanDirectory from "./routes/api/slippi/cleanDirectory.ts";
+import * as $api_slippi_getCurrentGame from "./routes/api/slippi/getCurrentGame.ts";
 import * as $api_startgg_importTournament from "./routes/api/startgg/importTournament.ts";
 import * as $api_startgg_updateSet from "./routes/api/startgg/updateSet.ts";
 import * as $index from "./routes/index.tsx";
@@ -18,6 +20,8 @@ const manifest = {
   routes: {
     "./routes/_404.tsx": $_404,
     "./routes/_app.tsx": $_app,
+    "./routes/api/slippi/cleanDirectory.ts": $api_slippi_cleanDirectory,
+    "./routes/api/slippi/getCurrentGame.ts": $api_slippi_getCurrentGame,
     "./routes/api/startgg/importTournament.ts": $api_startgg_importTournament,
     "./routes/api/startgg/updateSet.ts": $api_startgg_updateSet,
     "./routes/index.tsx": $index,

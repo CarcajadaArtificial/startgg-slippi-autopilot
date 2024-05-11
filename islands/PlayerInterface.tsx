@@ -126,7 +126,16 @@ export default function (props: { set: iSet }) {
               enabledStartButton ? null : "opacity-50 cursor-not-allowed",
             )}
             disabled={!enabledStartButton}
-            onClick={() => setMatchPhase("waiting")}
+            onClick={async () => {
+              await fetch("/api/slippi/cleanDirectory", {
+                method: "POST",
+                mode: "no-cors",
+                body: JSON.stringify({}),
+              }).then(async (res) => {
+                console.log(await res.json());
+              });
+              setMatchPhase("waiting");
+            }}
           >
             Start Tournament Match
           </button>
@@ -141,8 +150,18 @@ export default function (props: { set: iSet }) {
       </div>
     );
   } else if (matchPhase === "waiting") {
-    setTimeout(() => {
-      // rerenderComponent(renderTimes + 1);
+    setTimeout(async () => {
+      await fetch("/api/slippi/getCurrentGame", {
+        method: "POST",
+        mode: "no-cors",
+        body: JSON.stringify({}),
+      }).then(async (res) => {
+        const data = await res.json();
+        if (data.gameInProgress) {
+          setMatchPhase("playing");
+        }
+      });
+      rerenderComponent(renderTimes + 1);
     }, 1000);
 
     return (
@@ -155,6 +174,8 @@ export default function (props: { set: iSet }) {
         <span class="loader"></span>
       </div>
     );
+  } else if (matchPhase === "playing") {
+    return <>Match currently being played</>;
   } else {
     return <>Unkown phase</>;
   }

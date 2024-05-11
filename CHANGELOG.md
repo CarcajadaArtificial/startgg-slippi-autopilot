@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.0.18
+
+- Added the `slippi-js` npm library.
+- Added the `/slippi/cleanDirectory` and `/slippi/getCurrentGame` API endpoints.
+- Added a change of phase inside the `<PlayerInterface/>` island.
+
 ## v0.0.17
 
 - Added phases to the player interface.
