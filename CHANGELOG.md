@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.0.19
+
+- Refactored the `<FloatingCard/>` and `<PlayerSection/>` components from `<PlayerInterface/>`.
+
 ## v0.0.18
 
 - Added the `slippi-js` npm library.

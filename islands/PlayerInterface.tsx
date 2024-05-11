@@ -1,73 +1,9 @@
-import { StateUpdater, useState } from "preact/hooks";
-import { ComponentChildren } from "preact";
+import { useState } from "preact/hooks";
 import { cn } from "cn";
 import type { iSet } from "@/src/startgg/mod.ts";
 import PortSelector from "./PortSelector.tsx";
-
-function PlayerSection(
-  props: {
-    alignRight?: boolean;
-    set: iSet;
-    playerPort: number;
-    opponentPort: number;
-    setPlayerPort: StateUpdater<number>;
-  },
-) {
-  const { alignRight, set, playerPort, setPlayerPort, opponentPort } = props;
-
-  const entrant = set.slots[alignRight ? 1 : 0].entrant;
-  const arrow = alignRight ? "↘" : "↙";
-
-  return (
-    <div
-      class={cn(
-        "flex-1 p-8",
-        playerPort >= 1 && playerPort <= 4
-          ? `gradient${alignRight ? "-r" : ""}-${playerPort}`
-          : null,
-      )}
-    >
-      <div
-        class={cn(
-          "h-full flex flex-col justify-between",
-          alignRight ? "text-right" : "text-left",
-        )}
-      >
-        <div>
-          <h1 class="text-4xl font-extrabold">
-            {entrant.name}
-          </h1>
-          <code class="text-xs block mt-2 text-light">{entrant.id}</code>
-        </div>
-        <PortSelector
-          selection={playerPort}
-          updater={setPlayerPort}
-          alignRight={alignRight}
-          opponentSelection={opponentPort}
-        />
-        <div>
-          <p class="text-9xl">{arrow}</p>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-const FloatingCard = (
-  props: { children: ComponentChildren; bottom?: boolean },
-) => (
-  <div
-    class={cn(
-      "text-center absolute bg-darker p-4 rounded border-2 border-lighter",
-      props.bottom ? "bottom-16 w-96" : "top-24 w-56",
-    )}
-    style={{
-      left: props.bottom ? "calc(50% - 192px)" : "calc(50% - 112px)",
-    }}
-  >
-    {props.children}
-  </div>
-);
+import PlayerSection from "@/components/PlayerSection.tsx";
+import FloatingCard from "@/components/FloatingCard.tsx";
 
 type iMatchFaces = "selection" | "waiting" | "playing" | "confirm";
 
@@ -95,17 +31,25 @@ export default function (props: { set: iSet }) {
           <PlayerSection
             set={props.set}
             playerPort={player1Port}
-            setPlayerPort={setPlayer1Port}
-            opponentPort={player2Port}
-          />
+          >
+            <PortSelector
+              selection={player1Port}
+              updater={setPlayer1Port}
+              opponentSelection={player2Port}
+            />
+          </PlayerSection>
           <div class="bg-lighter w-0.5"></div>
           <PlayerSection
             set={props.set}
             playerPort={player2Port}
-            setPlayerPort={setPlayer2Port}
-            opponentPort={player1Port}
             alignRight
-          />
+          >
+            <PortSelector
+              selection={player2Port}
+              updater={setPlayer2Port}
+              opponentSelection={player1Port}
+            />
+          </PlayerSection>
         </div>
         <FloatingCard bottom>
           <p class="text-2xl font-extrabold">
