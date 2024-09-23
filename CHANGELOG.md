@@ -1,8 +1,20 @@
 # Changelog
 
+## v0.0.20
+
+- Added the tourney search and db storage flow. `islands/TournamentSearch.tsx`,
+  `routes/api/db/tournaments.ts`, `routes/api/startgg/searchTournaments.ts`,
+  `src/db/tournaments.ts`, `src/startgg/queries.ts` , `src/startgg/types.ts`
+- Added lunchbox, resin, and ulid as dependencies. `deno.json`
+- Added the lunchbox plugin configuration. `fresh.config.ts`, `routes/_app.tsx`
+- Added a module for managing all the request and responses types from api
+  endpoints. `src/apiTypes.ts`
+- Removed previous theme styles. `static/styles.css`
+
 ## v0.0.19
 
-- Refactored the `<FloatingCard/>` and `<PlayerSection/>` components from `<PlayerInterface/>`.
+- Refactored the `<FloatingCard/>` and `<PlayerSection/>` components from
+  `<PlayerInterface/>`.
 
 ## v0.0.18
 
@@ -35,7 +47,8 @@
 ## v0.0.13
 
 - Added the `/set/next` route.
-- Removed the `<SetCard/>` component's function that links to `/set/[setId].tsx`.
+- Removed the `<SetCard/>` component's function that links to
+  `/set/[setId].tsx`.
 
 ## v0.0.12
 
@@ -49,8 +62,8 @@
 ## v0.0.10
 
 - Added the `<SetFinished/>`, `<SetDefined/>`, and `<SetUndefined/>` components.
-- Added the `isSetDefined()`, `isSetUnstarted()`, `isSetPlaying()`, and `isSetFinished()` set type
-  validation functions.
+- Added the `isSetDefined()`, `isSetUnstarted()`, `isSetPlaying()`, and
+  `isSetFinished()` set type validation functions.
 
 ## v0.0.9
 

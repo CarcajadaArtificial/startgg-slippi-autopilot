@@ -66,3 +66,9 @@ export interface iEvent {
     }[];
   };
 }
+
+export interface iTournamentPeek {
+  id: string;
+  name: string;
+  slug: string;
+}

@@ -3,6 +3,7 @@ import {
   GraphQLClient,
 } from "https://deno.land/x/graphql_request@v4.1.0/mod.ts";
 import { iEvent, iSet } from "./types.ts";
+import { iTournamentPeek } from "@/src/startgg/types.ts";
 
 const client = new GraphQLClient("https://api.start.gg/gql/alpha", {
   headers: {
@@ -127,4 +128,30 @@ export const getSetById = (setId: string) =>
     }
     `,
     { setId },
+  );
+
+interface iSearchTournaments {
+  tournaments: {
+    nodes: iTournamentPeek[];
+  };
+}
+
+export const searchTournaments = (name: string) =>
+  client.request<iSearchTournaments>(
+    gql`
+    query SearchTournaments($name: String) {
+      tournaments(query: {
+        filter: {
+        name: $name
+      }
+      }) {
+        nodes {
+          id
+          name
+          slug
+        }
+      }
+    }
+    `,
+    { name },
   );
