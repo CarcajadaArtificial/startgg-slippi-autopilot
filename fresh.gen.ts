@@ -14,6 +14,7 @@ import * as $index from "./routes/index.tsx";
 import * as $set_setId_ from "./routes/set/[setId].tsx";
 import * as $set_index from "./routes/set/index.tsx";
 import * as $set_next from "./routes/set/next.tsx";
+import * as $tournament_tournamentSlug_index from "./routes/tournament/[tournamentSlug]/index.tsx";
 import * as $PlayerInterface from "./islands/PlayerInterface.tsx";
 import * as $PortSelector from "./islands/PortSelector.tsx";
 import * as $TournamentSearch from "./islands/TournamentSearch.tsx";
@@ -33,6 +34,8 @@ const manifest = {
     "./routes/set/[setId].tsx": $set_setId_,
     "./routes/set/index.tsx": $set_index,
     "./routes/set/next.tsx": $set_next,
+    "./routes/tournament/[tournamentSlug]/index.tsx":
+      $tournament_tournamentSlug_index,
   },
   islands: {
     "./islands/PlayerInterface.tsx": $PlayerInterface,

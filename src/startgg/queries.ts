@@ -11,82 +11,80 @@ const client = new GraphQLClient("https://api.start.gg/gql/alpha", {
   },
 });
 
-export const getAllTournamentSets = () =>
-  client.request<{ event: iEvent }>(
+export interface iGetAllTournamentSets {
+  tournament: { events: iEvent[] };
+}
+
+export const getAllTournamentSets = (slug: string) =>
+  client.request<iGetAllTournamentSets>(
     gql`
     query getEventId($slug: String) {
-      event(slug: $slug) {
-        id
-        name
-        phases {
+      tournament(slug: $slug) {
+        events {
           id
           name
-          sets(
-            page: 1
-            perPage: 12
-            sortType: STANDARD
-          ){
-            pageInfo {
-              total
-            }
-            nodes {
-              id
-              state
-              winnerId
-              fullRoundText
-              identifier
-              phaseGroup {
-                phase {
-                  name
-                }
+          phases {
+            id
+            name
+            sets(page: 1, perPage: 12, sortType: STANDARD) {
+              pageInfo {
+                total
               }
-              games {
+              nodes {
                 id
-                entrant1Score
-                entrant2Score
-                stage {
-                  id
-                  name
+                state
+                winnerId
+                fullRoundText
+                identifier
+                phaseGroup {
+                  phase {
+                    name
+                  }
                 }
-                selections {
-                  character {
+                games {
+                  id
+                  entrant1Score
+                  entrant2Score
+                  stage {
                     id
                     name
                   }
+                  selections {
+                    character {
+                      id
+                      name
+                    }
+                    entrant {
+                      id
+                      name
+                    }
+                  }
+                  state
+                }
+                slots {
+                  id
                   entrant {
                     id
                     name
                   }
                 }
-                state
-              }
-              slots {
-                id
-                entrant {
-                  id
-                  name
-                }
               }
             }
           }
-        }
-        entrants(query: {
-          page: 1
-          perPage: 8
-        }) {
-          nodes {
-            id
-            participants {
+          entrants(query: {page: 1, perPage: 8}) {
+            nodes {
               id
-              gamerTag
+              participants {
+                id
+                gamerTag
+              }
             }
           }
         }
       }
-    }`,
-    {
-      slug: Deno.env.get("STARTGG_TOURNAMENT_SLUG"),
-    },
+    }
+    `,
+    { slug },
   );
 
 export const getSetById = (setId: string) =>

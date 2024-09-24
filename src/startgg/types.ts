@@ -62,7 +62,7 @@ export interface iEvent {
       participants: {
         id: string;
         gamerTag: string;
-      };
+      }[];
     }[];
   };
 }

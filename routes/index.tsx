@@ -90,7 +90,11 @@ function TournamentDetails(props: iGetTournamentDetails) {
   return (
     <div>
       <Card>
-        <Text noMargins type="subheading" class="text-center">{name}</Text>
+        <Text noMargins type="subheading" class="text-center">
+          <Link href={slug}>
+            {name}
+          </Link>
+        </Text>
         {events.map((event) => (
           <ol class="list-decimal ml-4">
             {event.phases.map((phase) => (

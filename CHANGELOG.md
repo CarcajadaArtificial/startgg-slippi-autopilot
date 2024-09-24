@@ -1,5 +1,16 @@
 # Changelog
 
+## v0.0.22
+
+- Added a tournament detail page. Here one could see a bird's eve view, all
+  participants, phases and sets. There is still a few minor features missing
+  from the page, but that'll be for later.
+  `routes/tournament/[tournamentSlug]/index.tsx`.
+- Added a link to every db stored tournament detail page. `routes/index.tsx`
+- Added fixes to the `getAllTournamentSets()` function and added the
+  `iGetAllTournamentSets` interface.`src/startgg/queries.ts`
+- Added a minor fix to the `iEvent` type. `src/startgg/types.ts`
+
 ## v0.0.21
 
 - Added the correct interface to the `getTournamentDetails` startgg query.
