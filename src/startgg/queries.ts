@@ -2,8 +2,22 @@ import {
   gql,
   GraphQLClient,
 } from "https://deno.land/x/graphql_request@v4.1.0/mod.ts";
-import { iEvent, iSet } from "./types.ts";
-import { iTournamentPeek } from "@/src/startgg/types.ts";
+import {
+  gqlEntrant,
+  gqlEvent,
+  gqlOwner,
+  gqlPhase,
+  gqlSet,
+  gqlTournament,
+  sggEntrant,
+  sggEvent,
+  sggImage,
+  sggOwner,
+  sggPhase,
+  sggSet,
+  sggTournament,
+} from "@/src/startgg/types.ts";
+import { gqlImage } from "@/src/startgg/mod.ts";
 
 const client = new GraphQLClient("https://api.start.gg/gql/alpha", {
   headers: {
@@ -11,117 +25,12 @@ const client = new GraphQLClient("https://api.start.gg/gql/alpha", {
   },
 });
 
-export interface iGetAllTournamentSets {
-  tournament: { events: iEvent[] };
-}
-
-export const getAllTournamentSets = (slug: string) =>
-  client.request<iGetAllTournamentSets>(
-    gql`
-    query getEventId($slug: String) {
-      tournament(slug: $slug) {
-        events {
-          id
-          name
-          phases {
-            id
-            name
-            sets(page: 1, perPage: 12, sortType: STANDARD) {
-              pageInfo {
-                total
-              }
-              nodes {
-                id
-                state
-                winnerId
-                fullRoundText
-                identifier
-                phaseGroup {
-                  phase {
-                    name
-                  }
-                }
-                games {
-                  id
-                  entrant1Score
-                  entrant2Score
-                  stage {
-                    id
-                    name
-                  }
-                  selections {
-                    character {
-                      id
-                      name
-                    }
-                    entrant {
-                      id
-                      name
-                    }
-                  }
-                  state
-                }
-                slots {
-                  id
-                  entrant {
-                    id
-                    name
-                  }
-                }
-              }
-            }
-          }
-          entrants(query: {page: 1, perPage: 8}) {
-            nodes {
-              id
-              participants {
-                id
-                gamerTag
-              }
-            }
-          }
-        }
-      }
-    }
-    `,
-    { slug },
-  );
-
 export const getSetById = (setId: string) =>
-  client.request<{ set: iSet }>(
+  client.request<{ set: sggSet }>(
     gql`
     query getSetById($setId: ID!) {
       set(id: $setId) {
-        id
-        state
-        winnerId
-        games {
-          id
-          entrant1Score
-          entrant2Score
-          state
-          stage {
-            id
-            name
-          }
-          selections {
-            character {
-              id
-              name
-            }
-            entrant {
-              id
-              name
-            }
-          }
-        }
-        slots {
-          id
-          entrant {
-            id
-            name
-          }
-        }
+        ${gqlSet}
       }
     }
     `,
@@ -130,7 +39,7 @@ export const getSetById = (setId: string) =>
 
 export interface iSearchTournaments {
   tournaments: {
-    nodes: iTournamentPeek[];
+    nodes: sggTournament[];
   };
 }
 
@@ -144,9 +53,7 @@ export const searchTournaments = (name: string) =>
       }
       }) {
         nodes {
-          id
-          name
-          slug
+          ${gqlTournament}
         }
       }
     }
@@ -154,37 +61,25 @@ export const searchTournaments = (name: string) =>
     { name },
   );
 
-export interface iGetTournamentDetails {
-  tournament: {
-    id: number;
-    name: string;
-    slug: string;
-    url: string;
-    isRegistrationOpen: false;
-    eventRegistrationClosesAt: null;
-    images: {
-      id: number;
-      url: string;
-    }[];
-    owner: {
-      id: number;
-      slug: string;
-      player: { id: number; gamerTag: string; prefix: string };
+export interface sggCompleteEvent {
+  phases: (sggPhase & {
+    sets: {
+      pageInfo: {
+        total: number;
+      };
+      nodes: sggSet[];
     };
-    events: [
-      {
-        id: 1103531;
-        name: string;
-        state: string;
-        slug: string;
-        phases: {
-          id: number;
-          name: string;
-          state: string;
-          bracketType: string;
-        }[];
-      },
-    ];
+  })[];
+  entrants: {
+    nodes: sggEntrant[];
+  };
+}
+
+export interface iGetTournamentDetails {
+  tournament: sggTournament & {
+    images: sggImage[];
+    owner: sggOwner;
+    events: (sggEvent & sggCompleteEvent)[];
   };
 }
 
@@ -193,35 +88,35 @@ export const getTournamentDetails = (slug: string) =>
     gql`
     query GetTournamentDetails($slug: String) {
       tournament(slug: $slug) {
-        id
-        name
-        slug
-        url
-        isRegistrationOpen
-        eventRegistrationClosesAt
+        ${gqlTournament}
         images {
-          id
-          url
+          ${gqlImage}
         }
         owner {
-          id
-          slug
-          player {
-            id
-            gamerTag
-            prefix
-          }
+          ${gqlOwner}
         }
         events {
-          id
-          name
-          state
-          slug
+          ${gqlEvent}
           phases {
-            id
-            name
-            state
-            bracketType
+            ${gqlPhase}
+            sets(page: 1, perPage: 12, sortType: STANDARD) {
+              pageInfo {
+                total
+              }
+              nodes {
+                phaseGroup {
+                  phase {
+                    name
+                  }
+                }
+                ${gqlSet}
+              }
+            }
+          }
+          entrants(query: {page: 1, perPage: 8}) {
+            nodes {
+              ${gqlEntrant}
+            }
           }
         }
       }

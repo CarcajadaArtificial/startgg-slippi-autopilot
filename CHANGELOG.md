@@ -1,5 +1,16 @@
 # Changelog
 
+## v0.0.23
+
+- Added standarized types, functions, and queries for startgg graphql api.
+  `src/startgg/types.ts`, `src/startgg/queries.ts`
+- Removed the `getAllTournamentSets()` query because it became irrelevant
+  compared with `getTournamentDetails()`. `src/startgg/queries.ts`
+- Added refactoring components for the tournament view page.
+  `routes/tournament/[tournamentSlug]/index.tsx`.
+- Added comments for deprecated routes. `routes/set/index.tsx`,
+  `routes/set/next.tsx`
+
 ## v0.0.22
 
 - Added a tournament detail page. Here one could see a bird's eve view, all

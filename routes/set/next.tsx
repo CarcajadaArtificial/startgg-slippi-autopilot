@@ -10,7 +10,7 @@
  * @module
  */
 import { defineRoute } from "$fresh/server.ts";
-import { getAllTournamentSets, isSetUnstarted } from "@/src/startgg/mod.ts";
+// import { getAllTournamentSets, isSetUnstarted } from "@/src/startgg/mod.ts";
 import PlayerInterface from "@/islands/PlayerInterface.tsx";
 
 /**
@@ -24,10 +24,10 @@ import PlayerInterface from "@/islands/PlayerInterface.tsx";
  * @returns {JSXInternal.Element}
  */
 export default defineRoute(async (_req, ctx) => {
-  const event = (await getAllTournamentSets()).event;
-  const nextSet = event.phases.map((phase) =>
-    phase.sets.nodes
-  ).flat().filter(isSetUnstarted)[0];
+  // const event = (await getAllTournamentSets()).event;
+  // const nextSet = event.phases.map((phase) =>
+  //   phase.sets.nodes
+  // ).flat().filter(isSetUnstarted)[0];
 
-  return <PlayerInterface set={nextSet} />;
+  // return <PlayerInterface set={nextSet} />;
 });
