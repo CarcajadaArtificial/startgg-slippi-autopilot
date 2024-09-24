@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.0.21
+
+- Added the correct interface to the `getTournamentDetails` startgg query.
+  `src/startgg/queries.ts`
+- Added an updated card to the stored tournaments display. `routes/index.tsx`
+
 ## v0.0.20
 
 - Added the tourney search and db storage flow. `islands/TournamentSearch.tsx`,

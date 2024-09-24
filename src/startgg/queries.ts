@@ -130,7 +130,7 @@ export const getSetById = (setId: string) =>
     { setId },
   );
 
-interface iSearchTournaments {
+export interface iSearchTournaments {
   tournaments: {
     nodes: iTournamentPeek[];
   };
@@ -154,4 +154,80 @@ export const searchTournaments = (name: string) =>
     }
     `,
     { name },
+  );
+
+export interface iGetTournamentDetails {
+  tournament: {
+    id: number;
+    name: string;
+    slug: string;
+    url: string;
+    isRegistrationOpen: false;
+    eventRegistrationClosesAt: null;
+    images: {
+      id: number;
+      url: string;
+    }[];
+    owner: {
+      id: number;
+      slug: string;
+      player: { id: number; gamerTag: string; prefix: string };
+    };
+    events: [
+      {
+        id: 1103531;
+        name: string;
+        state: string;
+        slug: string;
+        phases: {
+          id: number;
+          name: string;
+          state: string;
+          bracketType: string;
+        }[];
+      },
+    ];
+  };
+}
+
+export const getTournamentDetails = (slug: string) =>
+  client.request<iGetTournamentDetails>(
+    gql`
+    query GetTournamentDetails($slug: String) {
+      tournament(slug: $slug) {
+        id
+        name
+        slug
+        url
+        isRegistrationOpen
+        eventRegistrationClosesAt
+        images {
+          id
+          url
+        }
+        owner {
+          id
+          slug
+          player {
+            id
+            gamerTag
+            prefix
+          }
+        }
+        events {
+          id
+          name
+          state
+          slug
+          phases {
+            id
+            name
+            state
+            bracketType
+          }
+        }
+      }
+    }
+    `,
+    { slug },
   );

@@ -14,9 +14,15 @@ import Layout from "lunchbox/components/Layout/index.tsx";
 import Module from "lunchbox/components/Module/index.tsx";
 import Card from "lunchbox/components/Card/index.tsx";
 import Text from "lunchbox/components/Text/index.tsx";
+import Code from "lunchbox/components/Code/index.tsx";
+import Link from "lunchbox/components/Link/index.tsx";
 import { kvIteratorToArray } from "lunchbox/src/db.ts";
 import TournamentSearch from "@/islands/TournamentSearch.tsx";
 import { readTournamentList } from "@/src/db/tournaments.ts";
+import {
+  getTournamentDetails,
+  iGetTournamentDetails,
+} from "@/src/startgg/queries.ts";
 
 /**
  * This function renders the home page. The home page functions as a status dashboard, here, one can see
@@ -34,18 +40,22 @@ import { readTournamentList } from "@/src/db/tournaments.ts";
  * @returns {JSXInternal.Element}
  */
 export default async function Home() {
-  const tournaments = await kvIteratorToArray(readTournamentList());
-  const slugs = tournaments.map((tournament) => tournament.value.slug);
+  const tournaments = await Promise.all(
+    (await kvIteratorToArray(readTournamentList())).map(
+      async (tournamentSlug) =>
+        await getTournamentDetails(tournamentSlug.value.slug),
+    ),
+  );
   const noTournaments = tournaments.length === 0;
 
-  console.log(tournaments);
   return (
     <Main class="h-screen">
       <Layout whitespace>
         <Module size={noTournaments ? "sm" : "md"}>
           {noTournaments ? null : (
-            tournaments.map((tournament) => <Card>{tournament.value.slug}
-            </Card>)
+            tournaments.map((tournament) => (
+              <TournamentDetails {...tournament} />
+            ))
           )}
         </Module>
         <Module size="md">
@@ -61,5 +71,50 @@ export default async function Home() {
         </Module>
       </Layout>
     </Main>
+  );
+}
+
+function TournamentDetails(props: iGetTournamentDetails) {
+  const {
+    name,
+    slug,
+    url,
+    owner,
+    events,
+    // id,
+    // isRegistrationOpen,
+    // eventRegistrationClosesAt,
+    // images,
+  } = props.tournament;
+
+  return (
+    <div>
+      <Card>
+        <Text noMargins type="subheading" class="text-center">{name}</Text>
+        {events.map((event) => (
+          <ol class="list-decimal ml-4">
+            {event.phases.map((phase) => (
+              <li class="mt-2">
+                <Text>{phase.name}</Text>
+                <Text type="small" noMargins>
+                  <Code>{phase.bracketType}</Code>/<Code>{phase.state}</Code>
+                </Text>
+              </li>
+            ))}
+          </ol>
+        ))}
+      </Card>
+      <Text noMargins type="small" class="mt-2 px-4">
+        <div class="flex justify-between">
+          <Link target="_blank" href={`https://start.gg${url}`}>{slug}</Link>
+          <span>
+            By:{" "}
+            <Link target="_blank" href={`https://start.gg/${owner.slug}`}>
+              {owner.player.prefix} {owner.player.gamerTag}
+            </Link>
+          </span>
+        </div>
+      </Text>
+    </div>
   );
 }
