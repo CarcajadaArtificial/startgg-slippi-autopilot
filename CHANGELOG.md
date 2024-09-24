@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.0.24
+
+- Added the `GameStock` component for displaying a single stock image.
+  `components/GameStock.tsx`
+
 ## v0.0.23
 
 - Added standarized types, functions, and queries for startgg graphql api.
