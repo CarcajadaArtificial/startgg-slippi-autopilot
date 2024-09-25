@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.0.25
+
+- Added a view for a set in progress and an abstraction for the `PhaseView`
+  component. `routes/tournament/[tournamentSlug]/index.tsx`
+- Added minor fixes. `routes/index.tsx`, `src/startgg/queries.ts`
+
 ## v0.0.24
 
 - Added the `GameStock` component for displaying a single stock image.

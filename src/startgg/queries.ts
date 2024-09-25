@@ -61,15 +61,16 @@ export const searchTournaments = (name: string) =>
     { name },
   );
 
-export interface sggCompleteEvent {
-  phases: (sggPhase & {
-    sets: {
-      pageInfo: {
-        total: number;
-      };
-      nodes: sggSet[];
+export interface sggSetNodes {
+  sets: {
+    pageInfo: {
+      total: number;
     };
-  })[];
+    nodes: sggSet[];
+  };
+}
+export interface sggCompleteEvent {
+  phases: (sggPhase & sggSetNodes)[];
   entrants: {
     nodes: sggEntrant[];
   };

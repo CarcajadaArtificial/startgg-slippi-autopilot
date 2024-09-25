@@ -49,7 +49,7 @@ export default async function Home() {
   const noTournaments = tournaments.length === 0;
 
   return (
-    <Main class="h-screen">
+    <Main class="min-h-screen">
       <Layout whitespace>
         <Module size={noTournaments ? "sm" : "md"}>
           {noTournaments ? null : (
