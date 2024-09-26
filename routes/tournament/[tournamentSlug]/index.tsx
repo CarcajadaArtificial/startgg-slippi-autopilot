@@ -187,10 +187,10 @@ export default async function (_req: Request, ctx: RouteContext) {
               <Linkmap
                 links={events.map((event) => ({
                   name: event.name,
-                  href: ctx.url.href + "/" + makeSlug(event.name),
+                  href: ctx.url.href + "#" + makeSlug(event.name),
                   children: event.phases.map((phase) => ({
                     name: phase.name,
-                    href: ctx.url.href + "/" + makeSlug(event.name) + "-" +
+                    href: ctx.url.href + "#" + makeSlug(event.name) + "-" +
                       makeSlug(phase.name),
                   })),
                 }))}

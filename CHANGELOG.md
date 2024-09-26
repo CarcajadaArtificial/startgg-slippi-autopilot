@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.0.26
+
+- Added a fix for the sidebar links.
+  `routes/tournament/[tournamentSlug]/index.tsx`
+- Added a fix where the `PhaseGroup` was incomplete and not declared with the
+  startgg gql standard queries and types. `src/startgg/queries.ts`,
+  `src/startgg/types.ts`
+
 ## v0.0.25
 
 - Added a view for a set in progress and an abstraction for the `PhaseView`

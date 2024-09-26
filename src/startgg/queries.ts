@@ -105,11 +105,6 @@ export const getTournamentDetails = (slug: string) =>
                 total
               }
               nodes {
-                phaseGroup {
-                  phase {
-                    name
-                  }
-                }
                 ${gqlSet}
               }
             }
