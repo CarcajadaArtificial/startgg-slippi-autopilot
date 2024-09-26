@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.0.27
+
+- Added an updatefor deno kv, changed the tournament id from a uuid to the
+  tournament's slug. So that it's easily obtainable from anywhere.
+  `islands/TournamentSearch.tsx`, `routes/api/db/tournaments/create.ts`,
+  `src/db/tournaments.ts`.
+- Added minor updates. `routes/index.tsx`.
+
 ## v0.0.26
 
 - Added a fix for the sidebar links.

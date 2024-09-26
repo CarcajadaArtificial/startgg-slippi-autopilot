@@ -51,7 +51,7 @@ export default async function Home() {
   return (
     <Main class="min-h-screen">
       <Layout whitespace>
-        <Module size={noTournaments ? "sm" : "md"}>
+        <Module size="md">
           {noTournaments ? null : (
             tournaments.map((tournament) => (
               <TournamentDetails {...tournament} />

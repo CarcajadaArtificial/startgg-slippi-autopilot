@@ -3,7 +3,7 @@ import Input from "lunchbox/components/Input/index.tsx";
 import Button from "lunchbox/components/Button/index.tsx";
 import Code from "lunchbox/components/Code/index.tsx";
 import Text from "lunchbox/components/Text/index.tsx";
-import { iTournamentPeek } from "@/src/startgg/types.ts";
+import { sggTournament } from "@/src/startgg/types.ts";
 import { ResSearchTournaments } from "@/src/apiTypes.ts";
 import {
   handleInteraction,
@@ -11,7 +11,7 @@ import {
   Key,
 } from "lunchbox/src/handlers.ts";
 
-const SearchResults = (props: { id: string; name: string; slug: string }) => (
+const SearchResults = (props: sggTournament) => (
   <div class="flex items-center mt-2">
     <div class="py-2 flex-1">
       <Text noMargins>{props.name}</Text>
@@ -34,7 +34,7 @@ const SearchResults = (props: { id: string; name: string; slug: string }) => (
 
 export default function () {
   const [searchValue, setSearchValue] = useState<string>("");
-  const [searchResults, setSearchResults] = useState<iTournamentPeek[]>(
+  const [searchResults, setSearchResults] = useState<sggTournament[]>(
     [],
   );
 
@@ -70,13 +70,7 @@ export default function () {
           Search
         </Button>
       </div>
-      <div class="flex flex-col">
-        {searchResults.map((searchResult) => (
-          <SearchResults
-            {...searchResult}
-          />
-        ))}
-      </div>
+      <div class="flex flex-col">{searchResults.map(SearchResults)}</div>
     </div>
   );
 }
