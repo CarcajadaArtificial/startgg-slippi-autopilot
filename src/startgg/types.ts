@@ -44,6 +44,7 @@ player {
 
 export interface sggEntrant {
   id: string;
+  name: string;
   participants: {
     id: string;
     gamerTag: string;
@@ -52,6 +53,7 @@ export interface sggEntrant {
 
 export const gqlEntrant = `
 id
+name
 participants {
   id
   gamerTag
@@ -137,14 +139,13 @@ export interface sggSet {
   fullRoundText: string;
   identifier: string;
   phaseGroup: {
+    id: number;
+    displayIdentifier: string;
     phase: sggPhase;
   };
   slots: {
     id: string;
-    entrant: {
-      id: string;
-      name: string;
-    };
+    entrant: sggEntrant;
   }[];
 }
 
@@ -155,6 +156,8 @@ winnerId
 fullRoundText
 identifier
 phaseGroup {
+  id
+  displayIdentifier
   phase {
     ${gqlPhase}
   }
@@ -165,8 +168,7 @@ games {
 slots {
   id
   entrant {
-    id
-    name
+    ${gqlEntrant}
   }
 }
 `;

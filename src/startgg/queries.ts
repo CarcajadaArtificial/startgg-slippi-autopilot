@@ -100,7 +100,7 @@ export const getTournamentDetails = (slug: string) =>
           ${gqlEvent}
           phases {
             ${gqlPhase}
-            sets(page: 1, perPage: 12, sortType: STANDARD) {
+            sets(page: 1, perPage: 20, sortType: STANDARD) {
               pageInfo {
                 total
               }

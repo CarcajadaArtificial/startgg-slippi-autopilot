@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.0.28
+
+- Added a refactoring for the components inside
+  `routes/tournament/[tournamentSlug]/index.tsx`. `components/EntrantView.tsx`,
+  `components/EventView.tsx`, `components/GameView.tsx`,
+  `components/PhaseView.tsx`, `components/SetView.tsx`.
+- Added a refactoring for the `makeSlug` function. `src/utils.ts`.
+- Added minor fixes. `src/startgg/queries.ts`, `src/startgg/types.ts`.
+
 ## v0.0.27
 
 - Added an updatefor deno kv, changed the tournament id from a uuid to the
