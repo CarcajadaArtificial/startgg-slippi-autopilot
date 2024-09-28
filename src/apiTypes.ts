@@ -21,3 +21,7 @@ export interface ReqReadTournamentSet extends dbTournamentSetKeys {}
 export interface ResReadTournamentSet extends dbTournamentSetValues {}
 
 export interface ReqUpdateTournamentSet extends dbUpdateTournamentSet {}
+
+export interface ReqStartSet {
+  setId: number;
+}

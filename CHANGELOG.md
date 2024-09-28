@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.0.31
+
+- Added the functionality to start or resume the tournament by starting the next
+  set when there isn't one already in progress.
+  `islands/StartNextMatchButton.tsx`,
+  `routes/tournament/[tournamentSlug]/index.tsx`
+- Added an api endpoint and startgg query for stating a set.
+  `routes/api/startgg/`, `src/startgg/queries.ts`, `src/apiTypes.ts`
+
 ## v0.0.30
 
 - Added minor updates. `islands/InteractiveSet.ts`, `src/startgg/utils.ts`

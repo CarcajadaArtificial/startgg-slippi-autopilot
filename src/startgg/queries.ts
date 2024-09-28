@@ -120,3 +120,19 @@ export const getTournamentDetails = (slug: string) =>
     `,
     { slug },
   );
+
+export interface iStartSet {
+  setId: number;
+}
+
+export const startSet = (setId: number) =>
+  client.request<iStartSet>(
+    gql`
+    mutation markSetInProgress($setId: ID!) {
+      markSetInProgress(setId: $setId) {
+        ${gqlSet}
+      }
+    }
+    `,
+    { setId: setId },
+  );

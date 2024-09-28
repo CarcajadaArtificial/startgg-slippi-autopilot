@@ -13,6 +13,8 @@ import SetView from "@/components/SetView.tsx";
 import { getSetsFromCompleteEvent } from "@/src/utils.ts";
 import { readTournamentSet } from "@/src/db/tournaments.ts";
 import InteractiveSet from "@/islands/InteractiveSet.tsx";
+import StartNextMatchButton from "@/islands/StartNextMatchButton.tsx";
+import { isSetPlaying, isSetUnstarted } from "@/src/startgg/utils.ts";
 
 export default async function (_req: Request, ctx: RouteContext) {
   const tournament =
@@ -27,18 +29,9 @@ export default async function (_req: Request, ctx: RouteContext) {
     .map(getSetsFromCompleteEvent)
     .flat();
 
-  const tournamentSetsDbSettings = await Promise.all(
-    tournamentSets.map(async (set) => (await readTournamentSet({
-      tournamentSlug: tournament.slug,
-      phaseId: String(set.phaseGroup.phase.id),
-      setIdentifierCombo:
-        `${set.phaseGroup.displayIdentifier}-${set.identifier}`,
-    }))),
-  );
-
-  // console.log(tournamentSetsDbSettings);
-
-  const setsInProgress = tournamentSets.filter((set) => set.state === 2);
+  const setsInProgress = tournamentSets.filter(isSetPlaying);
+  const setsToDo = tournamentSets.filter(isSetUnstarted);
+  const nextSetToDo = setsToDo[0];
 
   return (
     <div>
@@ -48,11 +41,7 @@ export default async function (_req: Request, ctx: RouteContext) {
           </Module>
           <Module size="xl">
             {setsInProgress.length === 0
-              ? (
-                <Text class="text-center opacity-50">
-                  Here is where the sets in progress will appear.
-                </Text>
-              )
+              ? <StartNextMatchButton {...nextSetToDo} />
               : (
                 <div class="flex flex-wrap gap-8">
                   {setsInProgress.map((setInProgress) => (
