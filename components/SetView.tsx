@@ -10,7 +10,7 @@ export default function (set: sggSet & { children?: ComponentChildren }) {
   return (
     <Panel
       class={cn(
-        "rounded pt-2 pb-1 px-2 mt-2 w-96",
+        "rounded pt-2 pb-1 px-2 w-96",
         set.state === 3
           ? "opacity-50"
           : set.state === 2

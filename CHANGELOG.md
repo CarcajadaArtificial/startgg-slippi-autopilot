@@ -1,5 +1,19 @@
 # Changelog
 
+## v0.0.29
+
+- Added the functionality to set bestOf 3 or bestOf 5 to any set in a
+  tournament. `routes/tournament/[tournamentSlug]/index.tsx`.
+- Added the `InteractiveSet` island that updates the bestOf setting.
+- Added `read` and `update` API endpoints for tournament sets.
+  `src/apiTypes.ts`, `src/db/tournaments.ts`.
+- Added the `getSetsFromCompleteEvent` function. `src/utils.ts`
+- Added the functionality that creates the initial torunament sets with best of
+  3 by default when a tournament is created.
+  `routes/api/db/tournaments/create.ts`
+- Added minor updates. `components/SetView.tsx`.
+- Removed the `EventView` and `PhaseView` component refacors.
+
 ## v0.0.28
 
 - Added a refactoring for the components inside

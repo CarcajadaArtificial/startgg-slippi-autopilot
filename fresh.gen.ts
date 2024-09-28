@@ -4,6 +4,8 @@
 
 import * as $_404 from "./routes/_404.tsx";
 import * as $_app from "./routes/_app.tsx";
+import * as $api_db_tournamentSets_read from "./routes/api/db/tournamentSets/read.ts";
+import * as $api_db_tournamentSets_update from "./routes/api/db/tournamentSets/update.ts";
 import * as $api_db_tournaments_create from "./routes/api/db/tournaments/create.ts";
 import * as $api_slippi_cleanDirectory from "./routes/api/slippi/cleanDirectory.ts";
 import * as $api_slippi_getCurrentGame from "./routes/api/slippi/getCurrentGame.ts";
@@ -15,6 +17,7 @@ import * as $set_setId_ from "./routes/set/[setId].tsx";
 import * as $set_index from "./routes/set/index.tsx";
 import * as $set_next from "./routes/set/next.tsx";
 import * as $tournament_tournamentSlug_index from "./routes/tournament/[tournamentSlug]/index.tsx";
+import * as $InteractiveSet from "./islands/InteractiveSet.tsx";
 import * as $PlayerInterface from "./islands/PlayerInterface.tsx";
 import * as $PortSelector from "./islands/PortSelector.tsx";
 import * as $TournamentSearch from "./islands/TournamentSearch.tsx";
@@ -24,6 +27,8 @@ const manifest = {
   routes: {
     "./routes/_404.tsx": $_404,
     "./routes/_app.tsx": $_app,
+    "./routes/api/db/tournamentSets/read.ts": $api_db_tournamentSets_read,
+    "./routes/api/db/tournamentSets/update.ts": $api_db_tournamentSets_update,
     "./routes/api/db/tournaments/create.ts": $api_db_tournaments_create,
     "./routes/api/slippi/cleanDirectory.ts": $api_slippi_cleanDirectory,
     "./routes/api/slippi/getCurrentGame.ts": $api_slippi_getCurrentGame,
@@ -38,6 +43,7 @@ const manifest = {
       $tournament_tournamentSlug_index,
   },
   islands: {
+    "./islands/InteractiveSet.tsx": $InteractiveSet,
     "./islands/PlayerInterface.tsx": $PlayerInterface,
     "./islands/PortSelector.tsx": $PortSelector,
     "./islands/TournamentSearch.tsx": $TournamentSearch,

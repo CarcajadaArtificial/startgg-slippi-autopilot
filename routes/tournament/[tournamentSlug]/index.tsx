@@ -10,7 +10,9 @@ import { getTournamentDetails } from "@/src/startgg/queries.ts";
 import { makeSlug } from "@/src/utils.ts";
 import GameView from "@/components/GameView.tsx";
 import SetView from "@/components/SetView.tsx";
-import EventView from "@/components/EventView.tsx";
+import { getSetsFromCompleteEvent } from "@/src/utils.ts";
+import { readTournamentSet } from "@/src/db/tournaments.ts";
+import InteractiveSet from "@/islands/InteractiveSet.tsx";
 
 export default async function (_req: Request, ctx: RouteContext) {
   const tournament =
@@ -21,17 +23,30 @@ export default async function (_req: Request, ctx: RouteContext) {
 
   const events = tournament.events;
 
-  const setsInProgress = events.map((event) => event.phases).flat().map((
-    phase,
-  ) => phase.sets.nodes).flat().filter((set) => set.state === 2);
+  const tournamentSets = events
+    .map(getSetsFromCompleteEvent)
+    .flat();
+
+  const tournamentSetsDbSettings = await Promise.all(
+    tournamentSets.map(async (set) => (await readTournamentSet({
+      tournamentSlug: tournament.slug,
+      phaseId: String(set.phaseGroup.phase.id),
+      setIdentifierCombo:
+        `${set.phaseGroup.displayIdentifier}-${set.identifier}`,
+    }))),
+  );
+
+  // console.log(tournamentSetsDbSettings);
+
+  const setsInProgress = tournamentSets.filter((set) => set.state === 2);
 
   return (
     <div>
       <Header>
-        <Layout whitespace>
-          <Module size="sm">
+        <Layout>
+          <Module size="xs">
           </Module>
-          <Module size="lg">
+          <Module size="xl">
             {setsInProgress.length === 0
               ? (
                 <Text class="text-center opacity-50">
@@ -57,8 +72,8 @@ export default async function (_req: Request, ctx: RouteContext) {
         </Layout>
       </Header>
       <Main class="min-h-screen">
-        <Layout whitespace>
-          <Module size="sm">
+        <Layout>
+          <Module size="xs">
             <Sidebar sticky fwd={{ container: { class: "mt-20" } }}>
               <Linkmap
                 links={events.map((event) => ({
@@ -73,8 +88,35 @@ export default async function (_req: Request, ctx: RouteContext) {
               />
             </Sidebar>
           </Module>
-          <Module size="lg">
-            {events.map(EventView)}
+          <Module size="xl">
+            {events.map((event) => (
+              <section class="flex flex-col gap-4">
+                <div>
+                  <h1 id={makeSlug(event.name)}>
+                    <Text noMargins type="title">
+                      {event.name}
+                    </Text>
+                  </h1>
+                  <Text noMargins type="small">{event.id}</Text>
+                </div>
+                {event.phases.map((phase) => (
+                  <div>
+                    <h2 id={`${makeSlug(event.name)}-${makeSlug(phase.name)}`}>
+                      <Text noMargins type="heading">{phase.name}</Text>
+                    </h2>
+                    <Text noMargins type="small">{phase.id}</Text>
+                    <div className="flex flex-wrap gap-6 mt-4 mb-8">
+                      {phase.sets.nodes.map((set) => (
+                        <InteractiveSet
+                          set={set}
+                          tournamentSlug={tournament.slug}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </section>
+            ))}
           </Module>
         </Layout>
       </Main>
