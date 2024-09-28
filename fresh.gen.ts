@@ -9,7 +9,6 @@ import * as $api_db_tournamentSets_update from "./routes/api/db/tournamentSets/u
 import * as $api_db_tournaments_create from "./routes/api/db/tournaments/create.ts";
 import * as $api_slippi_cleanDirectory from "./routes/api/slippi/cleanDirectory.ts";
 import * as $api_slippi_getCurrentGame from "./routes/api/slippi/getCurrentGame.ts";
-import * as $api_startgg_importTournament from "./routes/api/startgg/importTournament.ts";
 import * as $api_startgg_searchTournaments from "./routes/api/startgg/searchTournaments.ts";
 import * as $api_startgg_updateSet from "./routes/api/startgg/updateSet.ts";
 import * as $index from "./routes/index.tsx";
@@ -32,7 +31,6 @@ const manifest = {
     "./routes/api/db/tournaments/create.ts": $api_db_tournaments_create,
     "./routes/api/slippi/cleanDirectory.ts": $api_slippi_cleanDirectory,
     "./routes/api/slippi/getCurrentGame.ts": $api_slippi_getCurrentGame,
-    "./routes/api/startgg/importTournament.ts": $api_startgg_importTournament,
     "./routes/api/startgg/searchTournaments.ts": $api_startgg_searchTournaments,
     "./routes/api/startgg/updateSet.ts": $api_startgg_updateSet,
     "./routes/index.tsx": $index,

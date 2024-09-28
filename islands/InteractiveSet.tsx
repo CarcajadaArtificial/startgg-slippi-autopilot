@@ -1,5 +1,6 @@
 import { useEffect, useState } from "preact/hooks";
-import Loader from "lunchbox/components/Loader/index.tsx";
+import Text from "lunchbox/components/Text/index.tsx";
+import Code from "lunchbox/components/Code/index.tsx";
 import Button from "lunchbox/components/Button/index.tsx";
 import SetView from "@/components/SetView.tsx";
 import { sggSet } from "@/src/startgg/types.ts";
@@ -33,16 +34,14 @@ export default function (props: { set: sggSet; tournamentSlug: string }) {
     useEffectFetch();
   }, []);
 
-  if (setDBSettings === null) {
-    return <Loader loaded={false} />;
-  }
-
-  return (
-    <div>
-      <SetView {...set} />
-      <div class="flex justify-center mt-1">
+  const bestOfUpdater = set.state === 3 || setDBSettings === null
+    ? null
+    : (
+      <div class="flex justify-center items-center mt-1 gap-2">
+        <Code>best of {setDBSettings.bestOf}</Code>,
         <Button
-          type={setDBSettings.bestOf === 3 ? "transparent" : "panel"}
+          type={setDBSettings.bestOf === 3 ? "panel" : "transparent"}
+          padding="compact"
           onClick={async () => {
             setSetDBSettings(null);
             await fetch("/api/db/tournamentSets/update", {
@@ -59,9 +58,17 @@ export default function (props: { set: sggSet; tournamentSlug: string }) {
             setSetDBSettings(await fetchSetData(props));
           }}
         >
-          Change to best of {setDBSettings.bestOf === 3 ? 5 : 3}
+          <Text noMargins type="small">
+            Switch to {setDBSettings.bestOf === 3 ? 5 : 3}
+          </Text>
         </Button>
       </div>
+    );
+
+  return (
+    <div>
+      <SetView {...set} />
+      {bestOfUpdater}
     </div>
   );
 }

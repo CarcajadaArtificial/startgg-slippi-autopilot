@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.0.30
+
+- Added minor updates. `islands/InteractiveSet.ts`, `src/startgg/utils.ts`
+- Removed unused api. `routes/api/startgg/importTournament.ts`
+
 ## v0.0.29
 
 - Added the functionality to set bestOf 3 or bestOf 5 to any set in a
