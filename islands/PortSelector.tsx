@@ -45,34 +45,31 @@ const Port = (
 export default function (props: iPortSelection) {
   const { selection, updater, alignRight, opponentSelection } = props;
   return (
-    <div class={cn("flex flex-col", alignRight ? "items-end" : "items-start")}>
-      <h3 class="text-2xl mb-4">Port Select</h3>
-      <div class="flex gap-4 bg-lighter p-8 rounded">
-        <Port
-          port={1}
-          opponentPort={opponentSelection}
-          updater={updater}
-          selected={selection === 1}
-        />
-        <Port
-          port={2}
-          opponentPort={opponentSelection}
-          updater={updater}
-          selected={selection === 2}
-        />
-        <Port
-          port={3}
-          opponentPort={opponentSelection}
-          updater={updater}
-          selected={selection === 3}
-        />
-        <Port
-          port={4}
-          opponentPort={opponentSelection}
-          updater={updater}
-          selected={selection === 4}
-        />
-      </div>
+    <div class="flex gap-4 bg-lighter p-8 rounded">
+      <Port
+        port={1}
+        opponentPort={opponentSelection}
+        updater={updater}
+        selected={selection === 1}
+      />
+      <Port
+        port={2}
+        opponentPort={opponentSelection}
+        updater={updater}
+        selected={selection === 2}
+      />
+      <Port
+        port={3}
+        opponentPort={opponentSelection}
+        updater={updater}
+        selected={selection === 3}
+      />
+      <Port
+        port={4}
+        opponentPort={opponentSelection}
+        updater={updater}
+        selected={selection === 4}
+      />
     </div>
   );
 }

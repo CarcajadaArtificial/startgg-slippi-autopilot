@@ -20,6 +20,7 @@ import * as $tournament_tournamentSlug_setId_ from "./routes/tournament/[tournam
 import * as $tournament_tournamentSlug_index from "./routes/tournament/[tournamentSlug]/index.tsx";
 import * as $InteractiveSet from "./islands/InteractiveSet.tsx";
 import * as $PlayerInterface from "./islands/PlayerInterface.tsx";
+import * as $PortSelectionInterface from "./islands/PortSelectionInterface.tsx";
 import * as $PortSelector from "./islands/PortSelector.tsx";
 import * as $StartNextMatchButton from "./islands/StartNextMatchButton.tsx";
 import * as $TournamentSearch from "./islands/TournamentSearch.tsx";
@@ -49,6 +50,7 @@ const manifest = {
   islands: {
     "./islands/InteractiveSet.tsx": $InteractiveSet,
     "./islands/PlayerInterface.tsx": $PlayerInterface,
+    "./islands/PortSelectionInterface.tsx": $PortSelectionInterface,
     "./islands/PortSelector.tsx": $PortSelector,
     "./islands/StartNextMatchButton.tsx": $StartNextMatchButton,
     "./islands/TournamentSearch.tsx": $TournamentSearch,

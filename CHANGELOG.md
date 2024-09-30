@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.0.33
+
+- Added the `PortSelectionInterface` island.
+
 ## v0.0.32
 
 - Added the `routes/tournament/[tournamentSlug]/[setId].tsx` route where the

@@ -26,7 +26,6 @@ export default function (set: sggSet & { children?: ComponentChildren }) {
         </Code>
         <br />
       </Text>
-      <Text></Text>
       <div class="flex items-start gap-2">
         <Text noMargins style={{ lineBreak: "anywhere" }} class="flex-1">
           {set.slots[0].entrant
