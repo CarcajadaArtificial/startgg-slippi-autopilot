@@ -122,7 +122,7 @@ export const getTournamentDetails = (slug: string) =>
   );
 
 export interface iStartSet {
-  setId: number;
+  set: sggSet;
 }
 
 export const startSet = (setId: number) =>
@@ -133,6 +133,22 @@ export const startSet = (setId: number) =>
         ${gqlSet}
       }
     }
+    `,
+    { setId: setId },
+  );
+
+export interface iGetSet {
+  set: sggSet;
+}
+
+export const getSet = (setId: string) =>
+  client.request<iGetSet>(
+    gql`
+      query Sets($setId: ID!) {
+        set(id: $setId) {
+          ${gqlSet}
+        }
+      },
     `,
     { setId: setId },
   );

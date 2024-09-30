@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.0.32
+
+- Added the `routes/tournament/[tournamentSlug]/[setId].tsx` route where the
+  players will report the consol port they are playing as and will report them
+  the progress of their match.
+
 ## v0.0.31
 
 - Added the functionality to start or resume the tournament by starting the next

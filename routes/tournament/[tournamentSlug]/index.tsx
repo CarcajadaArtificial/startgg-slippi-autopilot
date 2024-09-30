@@ -3,6 +3,7 @@ import Header from "lunchbox/components/Header/index.tsx";
 import Main from "lunchbox/components/Main/index.tsx";
 import Layout from "lunchbox/components/Layout/index.tsx";
 import Text from "lunchbox/components/Text/index.tsx";
+import Link from "lunchbox/components/Link/index.tsx";
 import Module from "lunchbox/components/Module/index.tsx";
 import Sidebar from "lunchbox/components/Sidebar/index.tsx";
 import Linkmap from "lunchbox/components/Linkmap/index.tsx";
@@ -11,7 +12,6 @@ import { makeSlug } from "@/src/utils.ts";
 import GameView from "@/components/GameView.tsx";
 import SetView from "@/components/SetView.tsx";
 import { getSetsFromCompleteEvent } from "@/src/utils.ts";
-import { readTournamentSet } from "@/src/db/tournaments.ts";
 import InteractiveSet from "@/islands/InteractiveSet.tsx";
 import StartNextMatchButton from "@/islands/StartNextMatchButton.tsx";
 import { isSetPlaying, isSetUnstarted } from "@/src/startgg/utils.ts";
@@ -45,15 +45,22 @@ export default async function (_req: Request, ctx: RouteContext) {
               : (
                 <div class="flex flex-wrap gap-8">
                   {setsInProgress.map((setInProgress) => (
-                    <SetView {...setInProgress}>
-                      {setInProgress.games
-                        ? (
-                          <div class="pt-4 pb-1">
-                            {setInProgress.games.map(GameView)}
-                          </div>
-                        )
-                        : null}
-                    </SetView>
+                    <div>
+                      <SetView {...setInProgress}>
+                        {setInProgress.games
+                          ? (
+                            <div class="pt-4 pb-1">
+                              {setInProgress.games.map(GameView)}
+                            </div>
+                          )
+                          : null}
+                      </SetView>
+                      <Link href={`${ctx.url.href}/${setInProgress.id}`}>
+                        <Text noMargins type="small" class="mt-2 text-center">
+                          Go to the player view
+                        </Text>
+                      </Link>
+                    </div>
                   ))}
                 </div>
               )}
